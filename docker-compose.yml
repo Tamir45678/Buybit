@@ -1,0 +1,149 @@
+version: '3.4'
+
+services:
+#MySQL Service
+########
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_USER: "${MYSQL_USER}"
+    ports:
+      - "3306:3306" 
+    volumes:
+      - ./data:/var/lib/mysql
+
+#RabbitMQ
+########
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+    - 5672:5672
+    - 15672:15672
+
+
+  orders:
+    image: ${DOCKER_REGISTRY-}orders
+    build:
+      context: .
+      dockerfile: Orders/Dockerfile
+    ports:
+      - "5060:80"
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_SERVER: "${MYSQL_SERVER}"
+      MYSQL_PORT: "${MYSQL_PORT}"
+      MYSQL_ORDERS_DATABASE: "${MYSQL_ORDERS_DATABASE}"
+      MQ_HOST: "${MQ_HOST}"
+      MQ_PORT: "${MQ_PORT}"
+    depends_on:
+      - rabbitmq
+      - db
+
+  apigateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    ports:
+        - "5021:80"
+
+  balance:
+    image: ${DOCKER_REGISTRY-}balance
+    build:
+      context: .
+      dockerfile: Balance/Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_SERVER: "${MYSQL_SERVER}"
+      MYSQL_PORT: "${MYSQL_PORT}"
+      MYSQL_BALANCE_DATABASE: "${MYSQL_BALANCE_DATABASE}"
+      MQ_HOST: "${MQ_HOST}"
+      MQ_PORT: "${MQ_PORT}"
+    ports:
+      - "5040:80"
+    depends_on:
+      - rabbitmq
+      - db
+
+
+  marketplace:
+    image: ${DOCKER_REGISTRY-}marketplace
+    build:
+      context: .
+      dockerfile: Marketplace/Dockerfile
+    ports:
+      - "5030:80"
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_SERVER: "${MYSQL_SERVER}"
+      MYSQL_PORT: "${MYSQL_PORT}"
+      MYSQL_MARKET_DATABASE: "${MYSQL_MARKET_DATABASE}"
+      MQ_HOST: "${MQ_HOST}"
+      MQ_PORT: "${MQ_PORT}"
+    depends_on:
+      - rabbitmq
+      - db
+
+
+  shipping:
+    image: ${DOCKER_REGISTRY-}shipping
+    build:
+      context: .
+      dockerfile: Shipping/Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_SERVER: "${MYSQL_SERVER}"
+      MYSQL_PORT: "${MYSQL_PORT}"
+      MYSQL_SHIPPING_DATABASE: "${MYSQL_SHIPPING_DATABASE}"
+      MQ_HOST: "${MQ_HOST}"
+      MQ_PORT: "${MQ_PORT}"
+    ports:
+      - "5070:80"
+    depends_on:
+      - rabbitmq
+      - db
+      
+
+  stock:
+    image: ${DOCKER_REGISTRY-}stock
+    build:
+      context: .
+      dockerfile: Stock/Dockerfile
+    ports:
+      - "5050:80"
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_SERVER: "${MYSQL_SERVER}"
+      MYSQL_STOCK_DATABASE: "${MYSQL_STOCK_DATABASE}"
+      MQ_HOST: "${MQ_HOST}"
+      MQ_PORT: "${MQ_PORT}"
+    depends_on:
+      - rabbitmq
+      - db
+
+  users:
+    image: ${DOCKER_REGISTRY-}users
+    build:
+      context: .
+      dockerfile: Users/Dockerfile
+    ports:
+        - "5000:80"
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_SERVER: "${MYSQL_SERVER}"
+      MYSQL_PORT: "${MYSQL_PORT}"
+      MYSQL_USERS_DATABASE: "${MYSQL_USERS_DATABASE}"
+      MQ_HOST: "${MQ_HOST}"
+      MQ_PORT: "${MQ_PORT}"
+    depends_on:
+        - rabbitmq
+        - db
+
+
