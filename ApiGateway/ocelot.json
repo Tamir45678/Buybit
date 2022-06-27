@@ -1,0 +1,173 @@
+{
+  "Routes": [
+    {
+      "DownStreamHostAndPorts": [
+        {
+          "Host": "users",
+          "Port": 80
+        }
+      ],
+      "DownStreamPathTemplate": "/api/users/{id}",
+      "DownStreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "User"
+      },
+      "UpStreamPathTemplate": "/users/{id}",
+      "UpStreamHttpMethod": [ "GET" ]
+
+    },
+    {
+      "DownStreamHostAndPorts": [
+        {
+          "Host": "users",
+          "Port": 80
+        }
+      ],
+      "DownStreamPathTemplate": "/api/account/register",
+      "DownStreamScheme": "http",
+      "UpStreamPathTemplate": "/register",
+      "UpStreamHttpMethod": [ "POST" ]
+
+    },
+    {
+      "DownStreamHostAndPorts": [
+        {
+          "Host": "users",
+          "Port": 80
+        }
+      ],
+      "DownStreamPathTemplate": "/api/account/login",
+      "DownStreamScheme": "http",
+      "UpStreamPathTemplate": "/login",
+      "UpStreamHttpMethod": [ "POST" ]
+
+    },
+
+    //Marketplace Routes
+
+    {
+      "DownStreamHostAndPorts": [
+        {
+          "Host": "marketplace",
+          "Port": 80
+        }
+      ],
+
+      "DownStreamPathTemplate": "/api/products",
+      "DownStreamScheme": "http",
+      "UpStreamPathTemplate": "/products",
+      "UpStreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownStreamHostAndPorts": [
+        {
+          "Host": "marketplace",
+          "Port": 80
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "User"
+      },
+      "DownStreamPathTemplate": "/api/products",
+      "DownStreamScheme": "http",
+      "UpStreamPathTemplate": "/products",
+      "UpStreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownStreamHostAndPorts": [
+        {
+          "Host": "marketplace",
+          "Port": 80
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "User"
+      },
+      "DownStreamPathTemplate": "/api/products/{id}",
+      "DownStreamScheme": "http",
+      "UpStreamPathTemplate": "/products/{id}",
+      "UpStreamHttpMethod": [ "Delete" ]
+
+    },
+
+    //Balance Routes
+    {
+      "DownStreamHostAndPorts": [
+        {
+          "Host": "balance",
+          "Port": 80
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "User"
+      },
+      "DownStreamPathTemplate": "/api/budget/{id}",
+      "DownStreamScheme": "http",
+      "UpStreamPathTemplate": "/budget/{id}",
+      "UpStreamHttpMethod": [ "GET" ]
+    },
+
+    //Orders Routes
+    {
+      "DownStreamHostAndPorts": [
+        {
+          "Host": "orders",
+          "Port": 80
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RequestIdKey": "OcRequestId",
+      "RouteClaimsRequirement": {
+        "Role": "User"
+      },
+      "DownStreamPathTemplate": "/api/orders/{id}",
+      "DownStreamScheme": "http",
+      "UpStreamPathTemplate": "/orders/{id}",
+      "UpStreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownStreamHostAndPorts": [
+        {
+          "Host": "orders",
+          "Port": 80
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "User"
+      },
+      "DownStreamPathTemplate": "/api/orders/{id}",
+      "DownStreamScheme": "http",
+      "UpStreamPathTemplate": "/orders/{id}",
+      "UpStreamHttpMethod": [ "Delete" ]
+
+    }
+
+
+  ],
+    "GlobalConfiguration":{
+        "BaseUrl":"https://localhost:5021"
+    }
+}

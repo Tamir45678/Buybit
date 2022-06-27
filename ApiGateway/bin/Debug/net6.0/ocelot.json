@@ -1,0 +1,60 @@
+{
+    "Routes":[
+        {
+            "DownStreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5000
+                }
+            ],
+            "DownStreamPathTemplate": "/api/users",
+            "DownStreamScheme": "https",
+            "UpStreamPathTemplate": "/users",
+            "UpStreamHttpMethod": ["GET"]
+            
+        },
+        {
+            "DownStreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5000
+                }
+            ],
+            "DownStreamPathTemplate": "/api/users/{id}",
+            "DownStreamScheme": "https",
+            "UpStreamPathTemplate": "/users/{id}",
+            "UpStreamHttpMethod": ["GET"]
+            
+        },
+                {
+            "DownStreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5000
+                }
+            ],
+            "DownStreamPathTemplate": "/api/account/register",
+            "DownStreamScheme": "https",
+            "UpStreamPathTemplate": "/register",
+            "UpStreamHttpMethod": ["POST"]
+            
+        },
+        {
+            "DownStreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5000
+                }
+            ],
+            "DownStreamPathTemplate": "/api/account/login",
+            "DownStreamScheme": "https",
+            "UpStreamPathTemplate": "/login",
+            "UpStreamHttpMethod": ["GET"]
+            
+        }
+
+    ],
+    "GlobalConfiguration":{
+        "BaseUrl":"https://localhost:5021"
+    }
+}
