@@ -1,0 +1,39 @@
+.orderAccordion{
+    width:80%;
+    height:80%;
+    margin:50px;
+}
+
+.noOrders{
+    width:150vh;
+    height:600px;
+    margin: auto;
+    background-color: aliceblue;
+}
+
+.noOrders > h1{
+
+    text-align: center;
+    padding-top: 200px;
+    color:blue
+}
+.ordersContainer > h1{
+    text-align: center;
+    margin-top: 30px;
+    
+}
+
+.ordersContainer{
+    width:80%;
+    margin:auto;
+}
+
+.orderPanel{
+    margin: auto;
+    position: relative;
+}
+
+.orderList{
+    padding: 10px;
+}
+

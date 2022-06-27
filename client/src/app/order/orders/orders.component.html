@@ -1,0 +1,16 @@
+<div class="ordersContainer">
+    <h1>
+        Orders
+    </h1>
+
+    <mat-accordion class="orderAccordion" *ngIf="(this.orderService.currentOrders$|async) as orders">
+        <div class ="orderList" *ngFor="let order of orders">
+            <app-order-panel class="orderPanel"  [order] = "order"></app-order-panel>
+        </div>
+        <!-- <div class = "noOrders" *ngIf="orders">
+            <h1>You Have no Orders Yet. Please go to shop!</h1>
+        </div> -->
+    </mat-accordion>
+
+</div>
+

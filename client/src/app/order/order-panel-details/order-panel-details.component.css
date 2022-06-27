@@ -1,0 +1,25 @@
+.orderDetails{
+	display: grid;
+	grid-template-columns: 2fr 1fr 1fr 1fr ;
+	width:100%;
+}
+
+p{
+    font-size: 25px;
+}
+
+mat-card-content{
+	font-size: 25px;
+}
+
+.orderDetails > div{
+	margin-top:auto
+}
+
+.orderContent {
+	margin:auto;
+}
+
+.cancelBtn:hover{
+        background-color: red;
+}

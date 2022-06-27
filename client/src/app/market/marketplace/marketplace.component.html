@@ -1,0 +1,11 @@
+<div class="marketplaceContainer">
+    <h1 style="text-align:center">Marketplace</h1>
+    <mat-tab-group mat-align-tabs="center" *ngIf="this.marketplaceService.currentProduct$|async as products">
+        <mat-tab *ngFor="let product of products" label={{product.productName}}>
+            <app-market-card  [product] ="product">
+            </app-market-card>
+        </mat-tab>
+    </mat-tab-group>
+    
+</div>
+

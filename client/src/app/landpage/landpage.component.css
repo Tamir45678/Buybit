@@ -1,0 +1,20 @@
+.container { 
+    height:100vh;
+    display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: center;
+}
+
+h1{
+    font-size: 70px;    
+    text-align: center;
+    margin:80px auto;
+}
+
+.container{
+    background-color: #f5f7fa → #3f5a85;
+}
+

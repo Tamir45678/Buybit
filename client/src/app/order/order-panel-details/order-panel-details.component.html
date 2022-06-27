@@ -1,0 +1,19 @@
+<mat-card class="orderDetails" >
+    <div>
+        <mat-card-header>
+            <mat-card-title>{{this.product.productName}}</mat-card-title>
+            <mat-card-subtitle>{{this.product.productType}}</mat-card-subtitle>
+        </mat-card-header>
+    </div>
+    <div class="orderContent">
+        <mat-card-content><h4>Delivery date:</h4> {{this.order.deliveryDate|date}}</mat-card-content>
+    </div>
+    <div class="orderContent">
+        <mat-card-content>{{this.product.price}} &#8362;</mat-card-content>
+    </div>
+    <div class="orderContent">
+        <img mat-card-sm-image src={{this.product.imageUrl}}/>
+        <button *ngIf ="isShipped" class ="cancelBtn" mat-raised-button color="warn" (click)="cancelOrder()">CANCEL</button>
+        <h3 *ngIf="!isShipped">Already Shipped</h3>
+    </div>
+</mat-card>

@@ -1,0 +1,25 @@
+.navbar{
+    margin-top: 0;
+    width:100%;
+    background-color: aquamarine;
+    height:10%;
+    position:fixed;
+}
+
+.icon{
+    font-size: large;
+}
+
+mat-toolbar > div{
+    margin-right: 10em;
+    margin-left:2em;
+}
+
+.matIcon{
+    transform: scale(1);
+}
+
+.logoutBtn:hover{
+        background-color: red;
+}
+

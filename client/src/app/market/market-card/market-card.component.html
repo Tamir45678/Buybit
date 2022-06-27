@@ -1,0 +1,21 @@
+<mat-card class="product-card">
+    <mat-card-title-group>
+      <mat-card-title>{{product.productName}}</mat-card-title>
+      <mat-card-subtitle>{{product.productType}}</mat-card-subtitle>
+      <img mat-card-xl-image src={{product.imageUrl}} >
+    </mat-card-title-group>
+    <mat-card-content>
+      <p>
+        {{product.price}} &#8362;
+      </p>
+      <p>    
+          "If You order me you will be great"
+      </p>
+    </mat-card-content>
+    <mat-card-content>
+    </mat-card-content>
+    <mat-card-actions class="footer">
+      <button id={{product.id}} mat-raised-button color="primary" *ngIf="product.isInStock" (click)="openDialog()">ADD</button>
+      <h3 style="color:red" *ngIf="!product.isInStock">Not in Stock</h3>
+    </mat-card-actions>
+  </mat-card>

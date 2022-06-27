@@ -1,0 +1,30 @@
+.register{
+  margin:auto;
+  width:100%;
+  border:2px solid ;
+  padding:10px;
+  border-radius: 15px;
+  text-align:center;
+  padding:15px
+}
+  .register-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  margin:auto;
+} 
+
+.register-full-width {
+  width: 100%;
+}
+
+
+.submitBtn:hover {
+  background-color: rgb(81, 81, 218);
+}
+
+.loginBtn:hover { 
+  font-size:medium;
+  font-weight: bold;
+  text-decoration:underline;
+}

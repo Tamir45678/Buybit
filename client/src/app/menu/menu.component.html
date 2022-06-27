@@ -1,0 +1,32 @@
+<mat-toolbar color="primary" *ngIf="accountService.currentUser$|async as user" >
+    <div>
+        <a class='icon' mat-button routerLink="/Marketplace">BuyBit</a>
+        
+        <a mat-stroked-button routerLink="/Marketplace">
+            <span class ="material-icons">store</span>
+            Marketplace
+        </a>
+        <a mat-stroked-button routerLink="/Orders">
+            
+            <span class="material-icons">delivery_dining</span>
+            Orders
+        </a>
+    </div>
+    <div>
+        <h1>
+            Hey {{user.userName}}
+        </h1>
+    </div>
+    <div>
+        <h2>
+            Balance: {{user.balance}} &#8362;
+        </h2>
+    </div>
+    <div>
+        <button class="logoutBtn" mat-flat-button color="warn" (click)="logout()">Logout</button>
+    </div>
+    
+
+</mat-toolbar>
+
+

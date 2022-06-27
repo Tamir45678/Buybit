@@ -1,0 +1,155 @@
+name: dockercompose10063336347136083558
+services:
+  apigateway:
+    build:
+      context: C:\Users\tamirs\Desktop\developers_test
+      dockerfile: ApiGateway/Dockerfile
+    image: apigateway
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "5021"
+      protocol: tcp
+  balance:
+    build:
+      context: C:\Users\tamirs\Desktop\developers_test
+      dockerfile: Balance/Dockerfile
+    depends_on:
+      db:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    image: balance
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "5040"
+      protocol: tcp
+    restart: on-failure
+  db:
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_USER: root
+    image: mysql:latest
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 3306
+      published: "3306"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: C:\Users\tamirs\Desktop\developers_test\data
+      target: /var/lib/mysql
+      bind:
+        create_host_path: true
+  marketplace:
+    build:
+      context: C:\Users\tamirs\Desktop\developers_test
+      dockerfile: Marketplace/Dockerfile
+    depends_on:
+      db:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    image: marketplace
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "5030"
+      protocol: tcp
+    restart: on-failure
+  my-rabbit:
+    container_name: rabbitmq
+    image: rabbitmq:3-management-alpine
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 5672
+      published: "5672"
+      protocol: tcp
+    - mode: ingress
+      target: 15672
+      published: "15672"
+      protocol: tcp
+  orders:
+    build:
+      context: C:\Users\tamirs\Desktop\developers_test
+      dockerfile: Orders/Dockerfile
+    depends_on:
+      db:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    image: orders
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "5060"
+      protocol: tcp
+    restart: on-failure
+  shipping:
+    build:
+      context: C:\Users\tamirs\Desktop\developers_test
+      dockerfile: Shipping/Dockerfile
+    depends_on:
+      rabbitmq:
+        condition: service_started
+    image: shipping
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "5070"
+      protocol: tcp
+    restart: on-failure
+  stock:
+    build:
+      context: C:\Users\tamirs\Desktop\developers_test
+      dockerfile: Stock/Dockerfile
+    depends_on:
+      db:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    image: stock
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "5050"
+      protocol: tcp
+    restart: on-failure
+  users:
+    build:
+      context: C:\Users\tamirs\Desktop\developers_test
+      dockerfile: Users/Dockerfile
+    depends_on:
+      db:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    image: users
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "5000"
+      protocol: tcp
+    restart: on-failure
+networks:
+  default:
+    name: dockercompose10063336347136083558_default

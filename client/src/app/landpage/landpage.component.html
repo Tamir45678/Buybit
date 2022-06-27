@@ -1,0 +1,7 @@
+<div class="container"> 
+    <h1>Welcome to BuyBit</h1>
+    <app-login-form *ngIf="isMember" (newAccount) = "setFormModal($event)" (userLogged) = "setUser()" ></app-login-form>
+    <app-register *ngIf="!isMember" (isMember) = "setFormModal($event)"></app-register>
+</div>
+
+

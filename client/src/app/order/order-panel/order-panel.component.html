@@ -1,0 +1,11 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Order #{{order.id}}
+    </mat-panel-title>
+    <mat-panel-description>
+      Click for more information
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <app-order-panel-details [order]="order" [product]="product"></app-order-panel-details>
+</mat-expansion-panel>
